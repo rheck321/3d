@@ -45,8 +45,8 @@ function check() {
         // alert(d)
         filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
         UpdateTable(filtered);
-        GetDatesResult(filtered);
-        updateTable2(my_list)
+        // GetDatesResult(filtered);
+        // updateTable2(my_list)
         // UpdateTable(allData);
         // UpdateSuspendTable(allData);
         // UpdateClosedTable(allData);
@@ -95,25 +95,41 @@ function UpdateTable(data) {
         tableBody.appendChild(row);
 
   });
+  GetDatesResult(filtered);
 }
 
 function GetDatesResult(data) {
-    // alert('update')
+    // alert('get date')
     // update active table
     const tableBody = document.querySelector("#table2 tbody");
     tableBody.innerHTML = ""; // clear old data
+    my_list = [];
+    month = 0;
 
+    const digit1 = document.getElementById('digit1').value;
+    const digit2 = document.getElementById('digit2').value;
+    const digit3 = document.getElementById('digit3').value;
     data.forEach(result => {
         // date.textContent = result.date;
         // alert(result.date)
-        const currentdate = result.date;
+
+        mydate = new Date(result.date);
+        mydate.setDate(mydate.getDate())
+        month = mydate.getMonth() + 1; // Month is 0-indexed, so add 1
+        monthstr = `0${month}`.slice(-2); // Add '0' and take the last two characters
+        day = mydate.getDate();
+        daystr = `0${day}`.slice(-2); // Add '0' and take the last two characters
+        year = mydate.getFullYear();
+        currentdate = monthstr +"/"+ daystr +"/"+ year
 
         mydate = new Date(result.date);
         mydate.setDate(mydate.getDate()-1)
         month = mydate.getMonth() + 1; // Month is 0-indexed, so add 1
+        monthstr = `0${month}`.slice(-2); // Add '0' and take the last two characters
         day = mydate.getDate();
+        daystr = `0${day}`.slice(-2); // Add '0' and take the last two characters
         year = mydate.getFullYear();
-        prevdate = month +"/"+ day +"/"+ year
+        prevdate = monthstr +"/"+ daystr +"/"+ year
 
         // row = document.createElement("tr");
         // date = document.createElement("td");
@@ -125,16 +141,13 @@ function GetDatesResult(data) {
         mydate = new Date(result.date);
         mydate.setDate(mydate.getDate()+1)
         month = mydate.getMonth() + 1; // Month is 0-indexed, so add 1
+        monthstr = `0${month}`.slice(-2); // Add '0' and take the last two characters
         day = mydate.getDate();
+        daystr = `0${day}`.slice(-2); // Add '0' and take the last two characters
         year = mydate.getFullYear();
-        nextdate = month +"/"+ day +"/"+ year
+        nextdate = monthstr +"/"+ daystr +"/"+ year
 
-        // row = document.createElement("tr");
-        // date = document.createElement("td");
-        // date.textContent = nextdate;
-        // date.setAttribute("data-label", "date");
-        // row.appendChild(date);
-        // tableBody.appendChild(row);
+        console.log(digit1+" "+digit2+" "+digit3+" "+prevdate+" "+currentdate+" "+nextdate)
 
         my_list.push(prevdate)
         my_list.push(currentdate)
@@ -150,7 +163,7 @@ function GetDatesResult(data) {
         // alert(strpdate)
         // alert(strndate)
   });
-
+  // console.log(my_list);
   my_list.forEach(function(item) {
     // alert(item)
 
@@ -192,8 +205,4 @@ function GetDatesResult(data) {
     });
 
   });
-}
-
-function updateTable2() {
-
 }
