@@ -1,0 +1,232 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  /* background-color: black; */
+  background: #0f172a;
+  /* background-image: url('bg1.jpg'); */
+    background-size: cover; /* Scales the image to cover the entire background */
+    background-attachment: fixed; /* Keeps the background image fixed when scrolling */
+
+}
+
+/* Tab CSS */
+[data-tab-content] {
+  display: none;
+}
+.active[data-tab-content] {
+  display: block;
+}
+.tabs {
+  display: flex;
+  /* justify-content: space-around; */
+  list-style-type: none;
+}
+.tab {
+  /* padding: 10px; */
+    color: white;
+    font-family: poppins;
+    height: 30px;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.tab.active {
+    border-bottom: 2px solid grey;
+}
+.tab:hover {
+    border-bottom: 2px solid rgb(214, 25, 25);
+}
+.tab-content {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    border: 1px solid white;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    overflow: auto;             /* enable both scrollbars */
+    border-radius: 3px;
+    margin-left: 25px;
+    margin-right: 25px;
+    height: 480px;
+    padding-top: 10px;
+    
+}
+
+.outer-box {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: flex; /* Use flexbox for easy centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-color: yellow;
+  padding: 5px;
+}
+.outer-box1 {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: flex; /* Use flexbox for easy centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-color: transparent;
+  padding: 5px;
+}
+.inner-input {
+  width: 90%; /* Adjust as needed */
+  text-align: center;
+  padding: 8px;
+  border: none; /* Remove default input border */
+  outline: none; /* Remove outline on focus */
+  font-size: 16px;
+  background-color: transparent; /* Make input background transparent if desired */
+  color: white;
+}
+.container {
+    display: flex;
+    flex: 1;
+    width: 1200px;             /* force horizontal scroll */
+    height: 600px;              /* force vertical scroll */
+    overflow: auto;    
+    /* flex: 1 1 1 calc(33.33% - 16px); */
+    width: 100px;
+    height: 400px;
+    flex-wrap: wrap;
+    /* margin: 0 auto; */
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    justify-content: center;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.result_table thead {
+    position: sticky;
+    top: 0;
+}
+.result_table th, td {
+    padding: 5px;
+    /* text-align: center; */
+    /* border-bottom: 1px solid #ddd; */
+}
+
+.result_table {
+    border-left: white;
+    border-radius: 10px;
+    border-collapse: collapse;
+    width: 570px;
+    background: #1e293b;
+    border-radius: 5px;
+}
+
+.result_table thead{
+    border-bottom: 1px dashed grey;
+    background-color: #119fc6;
+}
+
+.result_table thead tr td{
+    font-size: 12px;
+    letter-spacing:  1px;
+    text-align: center;
+    color: black;
+    /* padding: 8px; */
+}
+
+.result_table thead tr td:nth-child(1){
+    text-align: center;
+
+}
+.result_table tfoot tr td{
+    font-size: 12px;
+    text-align: center;
+    letter-spacing:  1px;
+    color: red;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.result_table tbody tr td{
+    font-size: 12px;
+    color: white;
+    letter-spacing:  1px;
+    padding: 8px;
+    text-align: center;
+}
+.result_table tbody tr td:nth-child(1){
+    text-align: center;
+}
+
+/* Responsive: turn table into grid on small devices */
+
+    /* Responsive widths:
+       - Desktop (>=1024px): 3 columns (33.333% each)
+       - Tablet (600px - 1023px): 2 columns (50% each)
+       - Mobile (<600px): 1 column (100%)
+    */
+
+    @media (max-width: 900px) {
+        .chart-container {
+            flex: 1 1 calc(50% - 16px); /* 2 columns on tablet */
+      }
+    }
+
+    @media (max-width: 600px) {
+      .chart-container {
+        flex: 1 1 100%; /* 1 column on mobile */
+      }
+    }
+/* 
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+    thead {
+        display: none;
+    }
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        background: white;
+        }
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 1px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+    td:last-child {
+        border-bottom: none;    
+    }
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+    }
+} */
