@@ -1,208 +1,260 @@
-
-const tabs = document.querySelectorAll('[data-tab-target]')
-const tabContents = document.querySelectorAll('[data-tab-content]')
-
-
-// alert("eric")
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const target = document.querySelector(tab.dataset.tabTarget)
-    tabContents.forEach(tabContent => {
-      tabContent.classList.remove('active')
-    })
-    tabs.forEach(tab => {
-      tab.classList.remove('active')
-    })
-    tab.classList.add('active')
-    target.classList.add('active')
-  })
-})
-
-let allData = []; 
-let my_list = [];
-
-// Load data from external JSON file
-function check() {
-  // alert('click')
-  fetch("result.json")
-      // alert("tickets.json")
-      .then(response => response.json())
-      .then(data => {
-        // json table name  "nftlist" from json file
-        allData = data.draw;
-        // alert('erics')
-
-        const digit1 = document.getElementById('digit1');
-        const digit2 = document.getElementById('digit2');
-        const digit3 = document.getElementById('digit3');
-        // alert(digit1.value)
-        // alert(digit2.value)
-        // alert(digit3.value)
-
-        d = digit1.value +" "+ digit2.value +" "+ digit3.value
-        // let d = document.getElementById('digit1').textContent & " " & document.getElementById('digit2').textContent & " " & document.getElementById('digit3').textContent
-        // alert(d)
-        filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
-        UpdateTable(filtered);
-        // GetDatesResult(filtered);
-        // updateTable2(my_list)
-        // UpdateTable(allData);
-        // UpdateSuspendTable(allData);
-        // UpdateClosedTable(allData);
-        // UpdateLatestAlarmTable(allData);
-      })
-      .catch(error => console.error("Error loading JSON:", error));    
-
-}
-console.log(allData)
-
-
-function UpdateTable(data) {
-    // alert('update')
-    // update active table
-    const tableBody = document.querySelector("#table1 tbody");
-    tableBody.innerHTML = ""; // clear old data
-
-    data.forEach(result => {
-
-        // alert("processing")
-        // alert(result.date)
-
-        const row = document.createElement("tr");
-
-        const date = document.createElement("td");
-        date.textContent = result.date;
-        date.setAttribute("data-label", "date");
-
-        const draw1 = document.createElement("td");
-        draw1.textContent = result.draw1;
-        draw1.setAttribute("data-label", "draw1");
-
-        const draw2 = document.createElement("td");
-        draw2.textContent = result.draw2;
-        draw2.setAttribute("data-label", "draw2");
-
-        const draw3 = document.createElement("td");
-        draw3.textContent = result.draw3;
-        draw3.setAttribute("data-label", "draw3");
-
-        row.appendChild(date);
-        row.appendChild(draw1);
-        row.appendChild(draw2);
-        row.appendChild(draw3);
-
-        tableBody.appendChild(row);
-
-  });
-  GetDatesResult(filtered);
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-function GetDatesResult(data) {
-    // alert('get date')
-    // update active table
-    const tableBody = document.querySelector("#table2 tbody");
-    tableBody.innerHTML = ""; // clear old data
-    my_list = [];
-    month = 0;
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
-    const digit1 = document.getElementById('digit1').value;
-    const digit2 = document.getElementById('digit2').value;
-    const digit3 = document.getElementById('digit3').value;
-    data.forEach(result => {
-        // date.textContent = result.date;
-        // alert(result.date)
+body {
+  padding: 0;
+  margin: 0;
+  /* background-color: black; */
+  background: #0f172a;
+  /* background-image: url('bg1.jpg'); */
+    background-size: cover; /* Scales the image to cover the entire background */
+    background-attachment: fixed; /* Keeps the background image fixed when scrolling */
 
-        mydate = new Date(result.date);
-        mydate.setDate(mydate.getDate())
-        month = mydate.getMonth() + 1; // Month is 0-indexed, so add 1
-        monthstr = `0${month}`.slice(-2); // Add '0' and take the last two characters
-        day = mydate.getDate();
-        daystr = `0${day}`.slice(-2); // Add '0' and take the last two characters
-        year = mydate.getFullYear();
-        currentdate = monthstr +"/"+ daystr +"/"+ year
+}
 
-        mydate = new Date(result.date);
-        mydate.setDate(mydate.getDate()-1)
-        month = mydate.getMonth() + 1; // Month is 0-indexed, so add 1
-        monthstr = `0${month}`.slice(-2); // Add '0' and take the last two characters
-        day = mydate.getDate();
-        daystr = `0${day}`.slice(-2); // Add '0' and take the last two characters
-        year = mydate.getFullYear();
-        prevdate = monthstr +"/"+ daystr +"/"+ year
+/* Tab CSS */
+[data-tab-content] {
+  display: none;
+}
+.active[data-tab-content] {
+  display: block;
+}
+.tabs {
+  display: flex;
+  /* justify-content: space-around; */
+  list-style-type: none;
+}
+.tab {
+  /* padding: 10px; */
+    color: white;
+    font-family: poppins;
+    height: 30px;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.tab.active {
+    border-bottom: 2px solid grey;
+}
+.tab:hover {
+    border-bottom: 2px solid rgb(214, 25, 25);
+}
+.tab-content {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    border: 1px solid white;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    overflow: auto;             /* enable both scrollbars */
+    border-radius: 3px;
+    margin-left: 25px;
+    margin-right: 25px;
+    height: 480px;
+    padding-top: 10px;
+    
+}
 
-        // row = document.createElement("tr");
-        // date = document.createElement("td");
-        // date.textContent = prevdate;
-        // date.setAttribute("data-label", "date");
-        // row.appendChild(date);
-        // tableBody.appendChild(row);
+.outer-box {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: flex; /* Use flexbox for easy centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-color: yellow;
+  padding: 5px;
+}
+.outer-box1 {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: flex; /* Use flexbox for easy centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-color: transparent;
+  padding: 5px;
+}
+.outer-box2 {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: flex; /* Use flexbox for easy centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-color: gray;
+    background-color: #119fc6;
+  padding: 0px;
+}
+.button {
+    background-color: transparent;
+  /* background-color: rgb(255, 255, 255);  */
+  /* border: 2px solid #ccc; */
+    /* border-color: gray;  */
+  color: black;
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+  font-size: 16px;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+}
+.inner-input {
+  width: 90%; /* Adjust as needed */
+  text-align: center;
+  padding: 8px;
+  border: none; /* Remove default input border */
+  outline: none; /* Remove outline on focus */
+  font-size: 16px;
+  background-color: transparent; /* Make input background transparent if desired */
+  color: white;
+}
+.container {
+    display: flex;
+    flex: 1;
+    width: 1200px;             /* force horizontal scroll */
+    height: 600px;              /* force vertical scroll */
+    overflow: auto;    
+    /* flex: 1 1 1 calc(33.33% - 16px); */
+    width: 100px;
+    height: 400px;
+    flex-wrap: wrap;
+    /* margin: 0 auto; */
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    justify-content: center;
+    margin-left: 8px;
+    margin-right: 8px;
+}
 
-        mydate = new Date(result.date);
-        mydate.setDate(mydate.getDate()+1)
-        month = mydate.getMonth() + 1; // Month is 0-indexed, so add 1
-        monthstr = `0${month}`.slice(-2); // Add '0' and take the last two characters
-        day = mydate.getDate();
-        daystr = `0${day}`.slice(-2); // Add '0' and take the last two characters
-        year = mydate.getFullYear();
-        nextdate = monthstr +"/"+ daystr +"/"+ year
+.result_table thead {
+    position: sticky;
+    top: 0;
+}
+.result_table th, td {
+    padding: 5px;
+    /* text-align: center; */
+    /* border-bottom: 1px solid #ddd; */
+}
 
-        console.log(digit1+" "+digit2+" "+digit3+" "+prevdate+" "+currentdate+" "+nextdate)
+.result_table {
+    border-left: white;
+    border-radius: 10px;
+    border-collapse: collapse;
+    width: 570px;
+    background: #1e293b;
+    border-radius: 5px;
+}
 
-        my_list.push(prevdate)
-        my_list.push(currentdate)
-        my_list.push(nextdate)
+.result_table thead{
+    border-bottom: 1px dashed grey;
+    background-color: #119fc6;
+}
 
-        // const nextdate = currentdate.setDate(currentdate.getDate()+1)
-        // month = nextdate.getMonth() + 1; // Month is 0-indexed, so add 1
-        // day = nextdate.getDate();
-        // year = nextdate.getFullYear();
-        // strndate = month +"/"+day +"/"+year
+.result_table thead tr td{
+    font-size: 12px;
+    letter-spacing:  1px;
+    text-align: center;
+    color: black;
+    /* padding: 8px; */
+}
 
-        // alert(currentdate)
-        // alert(strpdate)
-        // alert(strndate)
-  });
-  // console.log(my_list);
-  my_list.forEach(function(item) {
-    // alert(item)
+.result_table thead tr td:nth-child(1){
+    text-align: center;
 
-      // row = document.createElement("tr");
-      // date = document.createElement("td");
-      // date.textContent = item;
-      // date.setAttribute("data-label", "date");
-      // row.appendChild(date);
-      // tableBody.appendChild(row);
+}
+.result_table tfoot tr td{
+    font-size: 12px;
+    text-align: center;
+    letter-spacing:  1px;
+    color: red;
+    font-weight: bold;
+    padding: 8px;
+}
 
-    allData.forEach(result => {
-      if (result.date == item) {
+.result_table tbody tr td{
+    font-size: 12px;
+    color: white;
+    letter-spacing:  1px;
+    padding: 8px;
+    text-align: center;
+}
+.result_table tbody tr td:nth-child(1){
+    text-align: center;
+}
 
-        row = document.createElement("tr");
-        date = document.createElement("td");
-        date.textContent = result.date;
-        date.setAttribute("data-label", "date");
-        row.appendChild(date);
-        tableBody.appendChild(row);
+/* Responsive: turn table into grid on small devices */
 
-        draw1 = document.createElement("td");
-        draw1.textContent = result.draw1;
-        draw1.setAttribute("data-label", "draw1");
-        row.appendChild(draw1);
+    /* Responsive widths:
+       - Desktop (>=1024px): 3 columns (33.333% each)
+       - Tablet (600px - 1023px): 2 columns (50% each)
+       - Mobile (<600px): 1 column (100%)
+    */
 
-        draw2 = document.createElement("td");
-        draw2.textContent = result.draw2;
-        draw2.setAttribute("data-label", "draw2");
-        row.appendChild(draw2);
-
-        draw3 = document.createElement("td");
-        draw3.textContent = result.draw3;
-        draw3.setAttribute("data-label", "draw3");
-        row.appendChild(draw3);
-
-        tableBody.appendChild(row);
-
+    @media (max-width: 900px) {
+        .chart-container {
+            flex: 1 1 calc(50% - 16px); /* 2 columns on tablet */
       }
-    });
+    }
 
-  });
-}
+    @media (max-width: 600px) {
+      .chart-container {
+        flex: 1 1 100%; /* 1 column on mobile */
+      }
+    }
+/* 
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+    thead {
+        display: none;
+    }
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        background: white;
+        }
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 1px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+    td:last-child {
+        border-bottom: none;    
+    }
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+    }
+} */
