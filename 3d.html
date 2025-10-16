@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="3d.js" defer></script>
+  <link href="3d.css" rel="stylesheet">
+  <title>3D</title>
+</head>
+<body>
+  <ul class="tabs">
+    <li data-tab-target="#home" class="active tab">Home</li>
+    <li data-tab-target="#active" class="tab">Active</li>
+    <!-- <li data-tab-target="#top" class="tab">Top 10 Alarm</li> -->
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" data-tab-content class="active">
+        <!-- <main class="flex-container-chart">   -->
+        <div class="flex-container">  
+            <div>
+                <!-- <div class="container">1</div> -->
+                    <div class="outer-box1">
+                    </div>
+                    <div class="outer-box">
+                        <input type="number" min="0" max="9" value="0" step="1" id="digit1" placeholder="1" class="inner-input">
+                    </div>
+                    <div class="outer-box">
+                        <input type="number" min="0" max="9" value="0" step="1" id="digit2" placeholder="2" class="inner-input">
+                    </div>
+                    <div class="outer-box">
+                        <input type="number" min="0" max="9" value="0" step="1" id="digit3" placeholder="2" class="inner-input">
+                    </div>
+                    <div class="outer-box1">
+                    </div>
+                    <div class="outer-box">
+                        <button onclick="check()">Click me</button>
+                    </div>
+                <!-- <div class="container">2</div> -->
+                <!-- <div class="container">3</div> -->
+                    <!-- <input name="digit3" placeholder="Enter your username"> -->
+            </div>
+            
+            <div class="container">
+                <table class="result_table" id="table1">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container">
+                <table class="result_table" id="table2">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- </main> -->
+    </div>
+     <div id="active" data-tab-content>
+     </div>
+  </div>
+</body>
+</html>
