@@ -22,41 +22,166 @@ tabs.forEach(tab => {
 let allData = []; 
 let my_list = [];
 
-// Load data from external JSON file
+// alert(switchnumber(1,2,3));
+
+fetch("result.json")
+    // alert("tickets.json")
+    .then(response => response.json())
+    .then(data => {
+      // json table name  "nftlist" from json file
+      allData = data.draw;
+      ShowResult(allData);
+    })
+    .catch(error => console.error("Error loading JSON:", error));    
+
 function check() {
   // alert('click')
-  fetch("result.json")
-      // alert("tickets.json")
-      .then(response => response.json())
-      .then(data => {
-        // json table name  "nftlist" from json file
-        allData = data.draw;
-        // alert('erics')
-
         const digit1 = document.getElementById('digit1');
         const digit2 = document.getElementById('digit2');
         const digit3 = document.getElementById('digit3');
-        // alert(digit1.value)
-        // alert(digit2.value)
-        // alert(digit3.value)
-
         d = digit1.value +" "+ digit2.value +" "+ digit3.value
-        // let d = document.getElementById('digit1').textContent & " " & document.getElementById('digit2').textContent & " " & document.getElementById('digit3').textContent
-        // alert(d)
         filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
         UpdateTable(filtered);
-        // GetDatesResult(filtered);
-        // updateTable2(my_list)
-        // UpdateTable(allData);
-        // UpdateSuspendTable(allData);
-        // UpdateClosedTable(allData);
-        // UpdateLatestAlarmTable(allData);
-      })
-      .catch(error => console.error("Error loading JSON:", error));    
+        updateTab3(digit1.value,digit2.value,digit3.value)
 
+        const tableBody = document.querySelector("#table3 tbody");
+        tableBody.innerHTML = ""; // clear old data
+        num = [digit1.value,digit2.value,digit3.value]
+        getPermutations(num).forEach(perm =>{
+          updateTab3(perm[0],perm[1],perm[2]);
+        });
+
+        new_num = switchnumber(digit1.value,digit2.value,digit3.value)
+        
+        getPermutations(new_num).forEach(perm =>{
+          updateTab3(perm[0],perm[1],perm[2]);
+        });
+        sortTable();
 }
-console.log(allData)
 
+function switchnumber(d1,d2,d3) {
+  // alert('eric')
+  const nums = [
+    [0,1],
+    [1,0],
+    [2,5],
+    [5,2],
+    [3,8],
+    [8,3],
+    [4,7],
+    [7,4],
+    [6,9],
+    [9,6],
+  ]
+
+    // console.log(nums[0][0]);
+    // console.log(nums[1][0]);
+    // console.log(nums[2][0]);
+    // console.log(nums[3][0]);
+    // console.log(nums[4][0]);
+    // console.log(nums[5][0]);
+    // console.log(nums[6][0]);
+    // console.log(nums[7][0]);
+    // console.log(nums[8][0]);
+    // console.log(nums[9][0]);
+
+  // console.log(nums[0][0]); // Output: 1 (first row, first column)
+  // console.log(nums[1][2]); // Output: 6 (second row, third column)
+
+  for (let i = 0; i < nums.length; i++) {
+    // for (let j = 0; j < nums[i].length; j++) {
+      if (nums[i][0] == d1) {
+          new_d1 = nums[i][1]
+      }
+      if (nums[i][0] == d2) {
+          new_d2 = nums[i][1]
+      }
+      if (nums[i][0] == d3) {
+          new_d3 = nums[i][1]
+      }
+      // alert(nums[i][j])
+      // console.log(`Element at [${i}][${j}]: ${nums[i][j]}`);
+      // console.log(nums[i][0]);
+    // } 
+  }
+  return new_d1+" "+new_d2+" "+new_d3;
+}
+
+function updateTab3(d1,d2,d3) {
+    const tableBody = document.querySelector("#table3 tbody");
+    // tableBody.innerHTML = ""; // clear old data
+
+    // alert(d)
+    d = d1 +" "+ d2 +" "+ d3
+    filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
+
+    // filtered = allData.filter(filter => filter.draw1.toLowerCase() == d1 || filter.draw2.toLowerCase() == d2 || filter.draw3.toLowerCase() == d3)
+    // console.log(allData)
+    console.log(filtered)
+
+     filtered.forEach(result => {
+
+        const row = document.createElement("tr");
+
+        const date = document.createElement("td");
+        date.textContent = result.date;
+        date.setAttribute("data-label", "date");
+
+        const draw1 = document.createElement("td");
+        draw1.textContent = result.draw1;
+        draw1.setAttribute("data-label", "draw1");
+
+        const draw2 = document.createElement("td");
+        draw2.textContent = result.draw2;
+        draw2.setAttribute("data-label", "draw2");
+
+        const draw3 = document.createElement("td");
+        draw3.textContent = result.draw3;
+        draw3.setAttribute("data-label", "draw3");
+
+        row.appendChild(date);
+        row.appendChild(draw1);
+        row.appendChild(draw2);
+        row.appendChild(draw3);
+
+        tableBody.appendChild(row);
+
+  });
+}
+
+function ShowResult(data) {
+    const tableBody = document.querySelector("#table5 tbody");
+    tableBody.innerHTML = ""; // clear old data
+
+     data.forEach(result => {
+
+        const row = document.createElement("tr");
+
+        const date = document.createElement("td");
+        date.textContent = result.date;
+        date.setAttribute("data-label", "date");
+
+        const draw1 = document.createElement("td");
+        draw1.textContent = result.draw1;
+        draw1.setAttribute("data-label", "draw1");
+
+        const draw2 = document.createElement("td");
+        draw2.textContent = result.draw2;
+        draw2.setAttribute("data-label", "draw2");
+
+        const draw3 = document.createElement("td");
+        draw3.textContent = result.draw3;
+        draw3.setAttribute("data-label", "draw3");
+
+        row.appendChild(date);
+        row.appendChild(draw1);
+        row.appendChild(draw2);
+        row.appendChild(draw3);
+
+        tableBody.appendChild(row);
+
+  });
+}
 
 function UpdateTable(data) {
     // alert('update')
@@ -147,7 +272,7 @@ function GetDatesResult(data) {
         year = mydate.getFullYear();
         nextdate = monthstr +"/"+ daystr +"/"+ year
 
-        console.log(digit1+" "+digit2+" "+digit3+" "+prevdate+" "+currentdate+" "+nextdate)
+        // console.log(digit1+" "+digit2+" "+digit3+" "+prevdate+" "+currentdate+" "+nextdate)
 
         my_list.push(prevdate)
         my_list.push(currentdate)
@@ -206,3 +331,74 @@ function GetDatesResult(data) {
 
   });
 }
+
+function getPermutations(input) {
+    // Base case: If the input is empty, return an array with a single empty array.
+    if (input.length === 0) return [[]];
+
+    // Base case: If there's only one element, return it as the only permutation.
+    if (input.length === 1) return [input];
+
+    // This will store the final list of permutations.
+    let permutations = [];
+
+    // Iterate through each element in the input.
+    for (let i = 0; i < input.length; i++) {
+        const currentElem = input[i];
+        
+        // To prevent duplicate permutations, skip iterations where the current element
+        // is the same as the previous one. This assumes the input is sorted for duplicate checks.
+        if (i > 0 && input[i] === input[i - 1]) continue;
+
+        // Get a new array excluding the current element.
+        const remainingInput = [...input.slice(0, i), ...input.slice(i+1)];
+
+        // Recursively get the permutations of the remaining elements.
+        const remainingPermutations = getPermutations(remainingInput);
+
+        // Combine the current element with each of the permutations of the remaining elements.
+        for (let perm of remainingPermutations) {
+            permutations.push([currentElem, ...perm]);
+        }
+    }
+
+    // Return the generated permutations.
+    return permutations;
+}
+
+function permutation(arr) {
+  alert(arr)
+  // let arr = [1,3];
+  let res = [[]];
+  for (let num of arr) {
+      const temp = [];
+      for (let arr of res) {
+          for (let i = 0; i <= arr.length; i++) {
+              const newArr = [...arr];
+              newArr.splice(i, 0, num);
+              temp.push(newArr);
+          }
+      }
+      res = temp;
+  }
+  return res;
+}
+    function sortTable() {
+        
+      let ascending = true;
+      const table = document.getElementById("table3");
+      const rows = Array.from(table.rows).slice(1); // exclude header
+
+      rows.sort((a, b) => {
+        const dateA = new Date(a.cells[0].innerText.trim());
+        const dateB = new Date(b.cells[0].innerText.trim());
+        return ascending ? dateA - dateB : dateB - dateA;
+      });
+
+      // Append sorted rows
+      rows.forEach(row => {
+        table.tBodies[0].appendChild(row)
+      });
+      ascending = !ascending; // toggle sort order
+    }
+  
