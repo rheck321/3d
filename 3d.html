@@ -10,14 +10,13 @@
 </head>
 <body>
   <ul class="tabs">
-    <li data-tab-target="#home" class="active tab">Home</li>
-    <li data-tab-target="#active" class="tab">Active</li>
-    <!-- <li data-tab-target="#top" class="tab">Top 10 Alarm</li> -->
+    <li data-tab-target="#home" class="active tab">Tab 1</li>
+    <li data-tab-target="#tab2" class="tab">Tab 2</li>
+    <li data-tab-target="#tab3" class="tab">Tab 3</li>
   </ul>
 
   <div class="tab-content">
     <div id="home" data-tab-content class="active">
-        <!-- <main class="flex-container-chart">   -->
         <div class="flex-container">  
             <div>
                 <!-- <div class="container">1</div> -->
@@ -34,8 +33,8 @@
                     </div>
                     <div class="outer-box1">
                     </div>
-                    <div class="outer-box">
-                        <button onclick="check()">Click me</button>
+                    <div class="outer-box2">
+                        <button class="button" onclick="check()">Click me</button>
                     </div>
                 <!-- <div class="container">2</div> -->
                 <!-- <div class="container">3</div> -->
@@ -71,10 +70,57 @@
                 </table>
             </div>
         </div>
-        <!-- </main> -->
     </div>
-     <div id="active" data-tab-content>
-     </div>
+    <div id="tab2" data-tab-content>
+        <div class="flex-container">              
+            <div class="container1">
+                <table class="result_table" id="table5">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="tab3" data-tab-content>
+        <div class="flex-container">              
+            <div class="container">
+                <table class="result_table" id="table3">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container">
+                <table class="result_table" id="table4">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
   </div>
 </body>
 </html>
