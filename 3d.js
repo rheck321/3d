@@ -44,12 +44,17 @@ function check() {
         updateTab1(filtered);
         updateTab3(digit1.value,digit2.value,digit3.value)
 
+        tableBody = document.querySelector("#table4 tbody");
+        tableBody.innerHTML = ""; // clear old data
+
         updateTab4(digit4.value,digit5.value)
         new_num = switchnumber(digit4.value,digit5.value)
-        updateTab4(digit4.value,digit5.value)
+
+        // alert("new_num"+" "+new_num+" "+new_num.slice(0,1)+" "+new_num.slice(2))
+        updateTab4(new_num.slice(0,1),new_num.slice(2))
 
 
-        const tableBody = document.querySelector("#table3 tbody");
+        tableBody = document.querySelector("#table3 tbody");
         tableBody.innerHTML = ""; // clear old data
         num = [digit1.value,digit2.value,digit3.value]
         getPermutations(num).forEach(perm =>{
@@ -427,5 +432,4 @@ function sortTable(mytable) {
   });
   ascending = !ascending; // toggle sort order
 }
-
 
