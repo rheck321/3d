@@ -41,8 +41,12 @@ function check() {
         const digit3 = document.getElementById('digit3');
         d = digit1.value +" "+ digit2.value +" "+ digit3.value
         filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
+
+        tableBody = document.querySelector("#table3 tbody");
+        tableBody.innerHTML = ""; // clear old data
+
         updateTab1(filtered);
-        updateTab3(digit1.value,digit2.value,digit3.value)
+        // updateTab3(digit1.value,digit2.value,digit3.value)
 
         tableBody = document.querySelector("#table4 tbody");
         tableBody.innerHTML = ""; // clear old data
@@ -58,14 +62,14 @@ function check() {
         tableBody.innerHTML = ""; // clear old data
         num = [digit1.value,digit2.value,digit3.value]
         getPermutations(num).forEach(perm =>{
+          // alert(perm[0]+" "+perm[1]+" "+perm[2])
           updateTab3(perm[0],perm[1],perm[2]);
         });
 
-        new_num = switchnumber(digit1.value,digit2.value,digit3.value)
-        
-        getPermutations(new_num).forEach(perm =>{
-          updateTab3(perm[0],perm[1],perm[2]);
-        });
+        // new_num = switchnumber(digit1.value,digit2.value,digit3.value)
+        // getPermutations(new_num).forEach(perm =>{
+        //   updateTab3(perm[0],perm[1],perm[2]);
+        // });
         sortTable("table3");
         sortTable("table4");
 
@@ -398,6 +402,8 @@ function getPermutations(input) {
         // To prevent duplicate permutations, skip iterations where the current element
         // is the same as the previous one. This assumes the input is sorted for duplicate checks.
         if (i > 0 && input[i] === input[i - 1]) continue;
+
+        if (i == 2 && input[0] === input[2]) continue;
 
         // Get a new array excluding the current element.
         const remainingInput = [...input.slice(0, i), ...input.slice(i+1)];
