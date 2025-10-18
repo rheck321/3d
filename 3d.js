@@ -46,8 +46,6 @@ function check() {
 
         updateTab4(digit4.value,digit5.value)
         new_num = switchnumber(digit4.value,digit5.value)
-
-        alert("new num "+new_num)
         updateTab4(digit4.value,digit5.value)
 
 
@@ -430,4 +428,5 @@ function sortTable(mytable) {
   });
   ascending = !ascending; // toggle sort order
 }
+
 
