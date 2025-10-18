@@ -41,8 +41,15 @@ function check() {
         const digit3 = document.getElementById('digit3');
         d = digit1.value +" "+ digit2.value +" "+ digit3.value
         filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
-        UpdateTable(filtered);
+        updateTab1(filtered);
         updateTab3(digit1.value,digit2.value,digit3.value)
+
+        updateTab4(digit4.value,digit5.value)
+        new_num = switchnumber(digit4.value,digit5.value)
+
+        alert("new num "+new_num)
+        updateTab4(digit4.value,digit5.value)
+
 
         const tableBody = document.querySelector("#table3 tbody");
         tableBody.innerHTML = ""; // clear old data
@@ -56,11 +63,18 @@ function check() {
         getPermutations(new_num).forEach(perm =>{
           updateTab3(perm[0],perm[1],perm[2]);
         });
-        sortTable();
+        sortTable("table3");
+        sortTable("table4");
+
 }
+
 
 function switchnumber(d1,d2,d3) {
   // alert('eric')
+  if (d3 === undefined) {
+      alert('undefine')
+      d3 = ""
+  }
   const nums = [
     [0,1],
     [1,0],
@@ -74,116 +88,24 @@ function switchnumber(d1,d2,d3) {
     [9,6],
   ]
 
-    // console.log(nums[0][0]);
-    // console.log(nums[1][0]);
-    // console.log(nums[2][0]);
-    // console.log(nums[3][0]);
-    // console.log(nums[4][0]);
-    // console.log(nums[5][0]);
-    // console.log(nums[6][0]);
-    // console.log(nums[7][0]);
-    // console.log(nums[8][0]);
-    // console.log(nums[9][0]);
-
-  // console.log(nums[0][0]); // Output: 1 (first row, first column)
-  // console.log(nums[1][2]); // Output: 6 (second row, third column)
-
   for (let i = 0; i < nums.length; i++) {
-    // for (let j = 0; j < nums[i].length; j++) {
       if (nums[i][0] == d1) {
           new_d1 = nums[i][1]
       }
       if (nums[i][0] == d2) {
           new_d2 = nums[i][1]
       }
-      if (nums[i][0] == d3) {
-          new_d3 = nums[i][1]
+      if (d3.length > 0) {
+        if (nums[i][0] == d3) {
+            new_d3 = nums[i][1]
+        }
+      } else {
+        new_d3 = ""
       }
-      // alert(nums[i][j])
-      // console.log(`Element at [${i}][${j}]: ${nums[i][j]}`);
-      // console.log(nums[i][0]);
-    // } 
   }
   return new_d1+" "+new_d2+" "+new_d3;
 }
-
-function updateTab3(d1,d2,d3) {
-    const tableBody = document.querySelector("#table3 tbody");
-    // tableBody.innerHTML = ""; // clear old data
-
-    // alert(d)
-    d = d1 +" "+ d2 +" "+ d3
-    filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
-
-    // filtered = allData.filter(filter => filter.draw1.toLowerCase() == d1 || filter.draw2.toLowerCase() == d2 || filter.draw3.toLowerCase() == d3)
-    // console.log(allData)
-    console.log(filtered)
-
-     filtered.forEach(result => {
-
-        const row = document.createElement("tr");
-
-        const date = document.createElement("td");
-        date.textContent = result.date;
-        date.setAttribute("data-label", "date");
-
-        const draw1 = document.createElement("td");
-        draw1.textContent = result.draw1;
-        draw1.setAttribute("data-label", "draw1");
-
-        const draw2 = document.createElement("td");
-        draw2.textContent = result.draw2;
-        draw2.setAttribute("data-label", "draw2");
-
-        const draw3 = document.createElement("td");
-        draw3.textContent = result.draw3;
-        draw3.setAttribute("data-label", "draw3");
-
-        row.appendChild(date);
-        row.appendChild(draw1);
-        row.appendChild(draw2);
-        row.appendChild(draw3);
-
-        tableBody.appendChild(row);
-
-  });
-}
-
-function ShowResult(data) {
-    const tableBody = document.querySelector("#table5 tbody");
-    tableBody.innerHTML = ""; // clear old data
-
-     data.forEach(result => {
-
-        const row = document.createElement("tr");
-
-        const date = document.createElement("td");
-        date.textContent = result.date;
-        date.setAttribute("data-label", "date");
-
-        const draw1 = document.createElement("td");
-        draw1.textContent = result.draw1;
-        draw1.setAttribute("data-label", "draw1");
-
-        const draw2 = document.createElement("td");
-        draw2.textContent = result.draw2;
-        draw2.setAttribute("data-label", "draw2");
-
-        const draw3 = document.createElement("td");
-        draw3.textContent = result.draw3;
-        draw3.setAttribute("data-label", "draw3");
-
-        row.appendChild(date);
-        row.appendChild(draw1);
-        row.appendChild(draw2);
-        row.appendChild(draw3);
-
-        tableBody.appendChild(row);
-
-  });
-}
-
-function UpdateTable(data) {
+function updateTab1(data) {
     // alert('update')
     // update active table
     const tableBody = document.querySelector("#table1 tbody");
@@ -222,6 +144,131 @@ function UpdateTable(data) {
   });
   GetDatesResult(filtered);
 }
+
+function updateTab3(d1,d2,d3) {
+  
+    const tableBody = document.querySelector("#table3 tbody");
+    // tableBody.innerHTML = ""; // clear old data
+
+    // alert(d)
+    d = d1 +" "+ d2 +" "+ d3
+    filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
+
+    // filtered = allData.filter(filter => filter.draw1.toLowerCase() == d1 || filter.draw2.toLowerCase() == d2 || filter.draw3.toLowerCase() == d3)
+    // console.log(allData)
+    // console.log(filtered)
+
+     filtered.forEach(result => {
+
+        const row = document.createElement("tr");
+
+        const date = document.createElement("td");
+        date.textContent = result.date;
+        date.setAttribute("data-label", "date");
+
+        const draw1 = document.createElement("td");
+        draw1.textContent = result.draw1;
+        draw1.setAttribute("data-label", "draw1");
+
+        const draw2 = document.createElement("td");
+        draw2.textContent = result.draw2;
+        draw2.setAttribute("data-label", "draw2");
+
+        const draw3 = document.createElement("td");
+        draw3.textContent = result.draw3;
+        draw3.setAttribute("data-label", "draw3");
+
+        row.appendChild(date);
+        row.appendChild(draw1);
+        row.appendChild(draw2);
+        row.appendChild(draw3);
+
+        tableBody.appendChild(row);
+  });
+}
+
+function updateTab4(d4,d5) {
+    // alert(d4+" "+d5)
+    const tableBody = document.querySelector("#table4 tbody");
+    // tableBody.innerHTML = ""; // clear old data
+
+    // alert(d)
+    d = d4 +" "+ d5
+
+    filtered = allData.filter(filter => filter.draw1.toLowerCase().includes(d));
+    console.log(filtered);
+
+// tstdata = allData.filter(tickets => tickets.state.toLowerCase().includes(area_selected))
+
+    // filtered = allData.filter(filter => filter.draw1.toLowerCase() == d || filter.draw2.toLowerCase() == d || filter.draw3.toLowerCase() == d)
+
+    // filtered = allData.filter(filter => filter.draw1.toLowerCase() == d1 || filter.draw2.toLowerCase() == d2 || filter.draw3.toLowerCase() == d3)
+    // console.log(allData)
+    // console.log(filtered)
+
+     filtered.forEach(result => {
+
+        const row = document.createElement("tr");
+
+        const date = document.createElement("td");
+        date.textContent = result.date;
+        date.setAttribute("data-label", "date");
+
+        const draw1 = document.createElement("td");
+        draw1.textContent = result.draw1;
+        draw1.setAttribute("data-label", "draw1");
+
+        const draw2 = document.createElement("td");
+        draw2.textContent = result.draw2;
+        draw2.setAttribute("data-label", "draw2");
+
+        const draw3 = document.createElement("td");
+        draw3.textContent = result.draw3;
+        draw3.setAttribute("data-label", "draw3");
+
+        row.appendChild(date);
+        row.appendChild(draw1);
+        row.appendChild(draw2);
+        row.appendChild(draw3);
+
+        tableBody.appendChild(row);
+  });
+}
+
+function ShowResult(data) {
+    const tableBody = document.querySelector("#table5 tbody");
+    tableBody.innerHTML = ""; // clear old data
+
+     data.forEach(result => {
+
+        const row = document.createElement("tr");
+
+        const date = document.createElement("td");
+        date.textContent = result.date;
+        date.setAttribute("data-label", "date");
+
+        const draw1 = document.createElement("td");
+        draw1.textContent = result.draw1;
+        draw1.setAttribute("data-label", "draw1");
+
+        const draw2 = document.createElement("td");
+        draw2.textContent = result.draw2;
+        draw2.setAttribute("data-label", "draw2");
+
+        const draw3 = document.createElement("td");
+        draw3.textContent = result.draw3;
+        draw3.setAttribute("data-label", "draw3");
+
+        row.appendChild(date);
+        row.appendChild(draw1);
+        row.appendChild(draw2);
+        row.appendChild(draw3);
+
+        tableBody.appendChild(row);
+
+  });
+}
+
 
 function GetDatesResult(data) {
     // alert('get date')
@@ -366,39 +413,21 @@ function getPermutations(input) {
     return permutations;
 }
 
-function permutation(arr) {
-  alert(arr)
-  // let arr = [1,3];
-  let res = [[]];
-  for (let num of arr) {
-      const temp = [];
-      for (let arr of res) {
-          for (let i = 0; i <= arr.length; i++) {
-              const newArr = [...arr];
-              newArr.splice(i, 0, num);
-              temp.push(newArr);
-          }
-      }
-      res = temp;
-  }
-  return res;
+function sortTable(mytable) {    
+  let ascending = true;
+  const table = document.getElementById(mytable);
+  const rows = Array.from(table.rows).slice(1); // exclude header
+
+  rows.sort((a, b) => {
+    const dateA = new Date(a.cells[0].innerText.trim());
+    const dateB = new Date(b.cells[0].innerText.trim());
+    return ascending ? dateA - dateB : dateB - dateA;
+  });
+
+  // Append sorted rows
+  rows.forEach(row => {
+    table.tBodies[0].appendChild(row)
+  });
+  ascending = !ascending; // toggle sort order
 }
-    function sortTable() {
-        
-      let ascending = true;
-      const table = document.getElementById("table3");
-      const rows = Array.from(table.rows).slice(1); // exclude header
 
-      rows.sort((a, b) => {
-        const dateA = new Date(a.cells[0].innerText.trim());
-        const dateB = new Date(b.cells[0].innerText.trim());
-        return ascending ? dateA - dateB : dateB - dateA;
-      });
-
-      // Append sorted rows
-      rows.forEach(row => {
-        table.tBodies[0].appendChild(row)
-      });
-      ascending = !ascending; // toggle sort order
-    }
-  
