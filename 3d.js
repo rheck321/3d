@@ -70,7 +70,6 @@ function check() {
 function switchnumber(d1,d2,d3) {
   // alert('eric')
   if (d3 === undefined) {
-      alert('undefine')
       d3 = ""
   }
   const nums = [
@@ -428,5 +427,6 @@ function sortTable(mytable) {
   });
   ascending = !ascending; // toggle sort order
 }
+
 
 
