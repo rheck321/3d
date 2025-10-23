@@ -78,7 +78,7 @@ function checkdigits() {
   const digits1 = document.getElementById('digits1');
   const digits2 = document.getElementById('digits2');
 
-  // alert(digits1.value+" "+digits2.value)
+  alert(digits1.value+" "+digits2.value)
   d1 = digits1.value.slice(0,1)+" "+digits1.value.slice(1,2)+" "+digits1.value.slice(2,3) 
   d2 = digits2.value.slice(0,1)+" "+digits2.value.slice(1,2)+" "+digits2.value.slice(2,3) 
   // alert(d1+" "+d2)
@@ -502,4 +502,5 @@ function sortTable(mytable) {
   });
   ascending = !ascending; // toggle sort order
 }
+
 
