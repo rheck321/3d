@@ -72,10 +72,42 @@ function check() {
         // });
         sortTable("table3");
         sortTable("table4");
-
 }
 
+function checkdigits() {
+  const digits1 = document.getElementById('digits1');
+  const digits2 = document.getElementById('digits2');
 
+  // alert(digits1.value+" "+digits2.value)
+  d1 = digits1.value.slice(0,1)+" "+digits1.value.slice(1,2)+" "+digits1.value.slice(2,3) 
+  d2 = digits2.value.slice(0,1)+" "+digits2.value.slice(1,2)+" "+digits2.value.slice(2,3) 
+  // alert(d1+" "+d2)
+
+  const tableBody = document.querySelector("#table6 tbody");
+  tableBody.innerHTML = ""; // clear old data
+
+  console.log(digits1.value.slice(0,1))
+  console.log(digits1.value.slice(1,2))
+  console.log(digits1.value.slice(2,3))
+
+  // filtered = allData.filter(filter => filter.draw3.toLowerCase() == d1 && filter.draw2.toLowerCase() == d2);
+  //     updateTab6(d1,d2);  
+
+  // filtered = allData.filter(filter => filter.draw3.toLowerCase() == d1 && filter.draw1.toLowerCase() == d2);
+  //   updateTab6(d1,d2);  
+
+  num = [d2.slice(0,1),d2.slice(2,3),d2.slice(4,5)]
+  getPermutations(num).forEach(perm =>{
+    newd2 = perm[0]+" "+perm[1]+" "+perm[2]
+    filter1 = allData.filter(filter => filter.draw1.toLowerCase() == d1 && filter.draw2.toLowerCase() == newd2);
+    filter2 = allData.filter(filter => filter.draw2.toLowerCase() == d1 && filter.draw3.toLowerCase() == newd2);
+    filter3 = allData.filter(filter => filter.draw2.toLowerCase() == d1 && filter.draw1.toLowerCase() == newd2);
+    filter4 = allData.filter(filter => filter.draw3.toLowerCase() == d1 && filter.draw2.toLowerCase() == newd2);
+
+    filtered = filter1.concat(filter2,filter3,filter4)
+    updateTab6();  
+  });
+}
 function switchnumber(d1,d2,d3) {
   // alert('eric')
   if (d3 === undefined) {
@@ -238,6 +270,38 @@ function updateTab4(d4,d5) {
         row.appendChild(draw3);
 
         tableBody.appendChild(row);
+  });
+}
+
+function updateTab6() {
+  // alert(d1+" "+d2)
+    const tableBody = document.querySelector("#table6 tbody");
+    // filtered = allData.filter(filter => filter.draw3.toLowerCase() == d1 && filter.draw2.toLowerCase() == d2);
+    // tableBody.innerHTML = ""; // clear old data
+    filtered.forEach(result => {
+      const row = document.createElement("tr"); 
+      const date = document.createElement("td");
+      date.textContent = result.date;
+      date.setAttribute("data-label", "date");
+
+      const draw1 = document.createElement("td");
+      draw1.textContent = result.draw1;
+      draw1.setAttribute("data-label", "draw1");
+
+      const draw2 = document.createElement("td");
+      draw2.textContent = result.draw2;
+      draw2.setAttribute("data-label", "draw2");
+
+      const draw3 = document.createElement("td");
+      draw3.textContent = result.draw3;
+      draw3.setAttribute("data-label", "draw3");
+
+      row.appendChild(date);
+      row.appendChild(draw1);
+      row.appendChild(draw2);
+      row.appendChild(draw3);
+
+      tableBody.appendChild(row);
   });
 }
 
