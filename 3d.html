@@ -13,6 +13,8 @@
     <li data-tab-target="#home" class="active tab">Tab 1</li>
     <li data-tab-target="#tab2" class="tab">Tab 2</li>
     <li data-tab-target="#tab3" class="tab">Tab 3</li>
+    <li data-tab-target="#tab4" class="tab">Tab 4</li>
+
   </ul>
 
   <div class="tab-content">
@@ -20,7 +22,6 @@
         <div class="flex-container">  
             <div>
                 <!-- <div class="container">1</div> -->
- -->
                     <div class="outer-box">
                         <input type="number" min="0" max="9" value="0" step="1" id="digit1" placeholder="1" class="inner-input">
                     </div>
@@ -114,6 +115,51 @@
             </div>
             <div class="container">
                 <table class="result_table" id="table4">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+        <div id="tab4" data-tab-content>
+        <div class="flex-container">           
+            <div>
+                    <div class="outer-box3">
+                        <input type="number" id="digits1" value="005" placeholder="1" class="inner-input">
+                    </div>
+                    <div class="outer-box3">
+                        <input type="number" id="digits2" value="163" placeholder="1" class="inner-input">
+                    </div>
+                    <div class="outer-box1">
+                    </div>
+                    <div class="outer-box4">
+                        <button class="button" onclick="checkdigits()">Click me</button>
+                    </div>
+            </div>   
+            <div class="container">
+                <table class="result_table" id="table6">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container">
+                <table class="result_table" id="table7">
                     <thead>
                         <tr>
                             <td>DATE</td>
