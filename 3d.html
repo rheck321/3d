@@ -10,11 +10,11 @@
 </head>
 <body>
   <ul class="tabs">
-    <li data-tab-target="#home" class="active tab">Tab 1</li>
-    <li data-tab-target="#tab2" class="tab">Tab 2</li>
-    <li data-tab-target="#tab3" class="tab">Tab 3</li>
-    <li data-tab-target="#tab4" class="tab">Tab 4</li>
-
+    <li data-tab-target="#home" class="active tab">3 Day Result</li>
+    <li data-tab-target="#tab2" class="tab">All Result</li>
+    <li data-tab-target="#tab3" class="tab">Syndicate</li>
+    <li data-tab-target="#tab4" class="tab">Dikit</li>    
+    <li data-tab-target="#tab5" class="tab">Month and Day</li>
   </ul>
 
   <div class="tab-content">
@@ -133,10 +133,10 @@
         <div class="flex-container">           
             <div>
                     <div class="outer-box3">
-                        <input type="number" id="digits1" value="005" placeholder="1" class="inner-input">
+                        <input type="number" id="digits1" value="099" placeholder="1" class="inner-input">
                     </div>
                     <div class="outer-box3">
-                        <input type="number" id="digits2" value="163" placeholder="1" class="inner-input">
+                        <input type="number" id="digits2" value="551" placeholder="1" class="inner-input">
                     </div>
                     <div class="outer-box1">
                     </div>
@@ -174,6 +174,55 @@
             </div>
         </div>
     </div>
+    </div>
+        <div id="tab5" data-tab-content>
+        <div class="flex-container">           
+            <div>
+                    <div class="outer-box5">
+                        <textarea>Month</textarea>
+                        <input type="number" id="mon" value="10" class="inner-input1">
+                    </div>
+                    <div class="outer-box5">
+                        <textarea>Day</textarea>
+                        <input type="number" id="day" value="27" class="inner-input1" color: #000080;>
+                    </div>
+                    <div class="outer-box1">
+                    </div>
+                    <div class="outer-box4">
+                        <button class="button" onclick="checkdate()">Click me</button>
+                    </div>
+            </div>   
+            <div class="container">
+                <table class="result_table" id="table8">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container">
+                <table class="result_table" id="table9">
+                    <thead>
+                        <tr>
+                            <td>DATE</td>
+                            <td>2PM</td>
+                            <td>5PM</td>
+                            <td>9PM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
   </div>
 </body>
 </html>
