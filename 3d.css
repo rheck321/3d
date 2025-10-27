@@ -20,6 +20,15 @@ body {
 
 }
 
+textarea {
+  border: none;
+  outline: none; /* Removes the focus outline */
+  width: 100%;
+  background-color: transparent;
+  color: #ccc;
+  font-size: 16px;
+  resize: none;
+}
 /* Tab CSS */
 [data-tab-content] {
   display: none;
@@ -57,13 +66,27 @@ body {
     background-color: black;
     border: 1px solid white;
     justify-content: center;
-    /* flex-wrap: wrap; */
     overflow: auto;             /* enable both scrollbars */
     border-radius: 3px;
     margin-left: 25px;
     margin-right: 25px;
     height: 480px;
     padding-top: 10px;
+    /* align-items: start; */
+}
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    border: 1px solid white;
+    justify-content: center;
+    overflow: auto;             /* enable both scrollbars */
+    border-radius: 3px;
+    margin-left: 25px;
+    margin-right: 25px;
+    height: 480px;
+    padding-top: 10px;
+    /* align-items: start; */
 }
 .outer-box {
   text-align: center;
@@ -132,6 +155,19 @@ body {
     background-color: #119fc6;
   padding: 0px;
 }
+.outer-box5 {
+  text-align: center;
+  width: 120px;
+  height: 40px;
+  margin-left: 15px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: flex; /* Use flexbox for easy centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-color: yellow;
+  padding: 5px;
+}
 .button {
   background-color: transparent;
   color: black;
@@ -150,11 +186,24 @@ body {
   background-color: transparent; /* Make input background transparent if desired */
   color: white;
 }
+.inner-input1 {
+  width: 90%; /* Adjust as needed */
+  text-align: center;
+  padding: 8px;
+  border: none; /* Remove default input border */
+  outline: none; /* Remove outline on focus */
+  font-size: 16px;
+  background-color: transparent; /* Make input background transparent if desired */
+  color: white;
+}
 .container {
     display: flex;
     flex: 1;
-    width: 1200px;             /* force horizontal scroll */
-    height: 600px;              /* force vertical scroll */
+    align-items: start;   /* align main axis to start o top */
+    justify-content: start;   /* align cross axis to start o top */
+
+    width: 1200px;        /* force horizontal scroll */
+    height: 600px;        /* force vertical scroll */
     overflow: auto;    
     /* flex: 1 1 1 calc(33.33% - 16px); */
     width: 100px;
@@ -172,6 +221,7 @@ body {
 .container1 {
     display: flex;
     flex: 1;
+    align-items: start;
     overflow: auto;    
     /* flex: 1 1 1 calc(33.33% - 16px); */
     /* width: 10px; */
